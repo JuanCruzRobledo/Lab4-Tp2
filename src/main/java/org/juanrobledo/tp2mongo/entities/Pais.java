@@ -5,35 +5,47 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Document(collection = "paises")
 public class Pais {
 
     @Id
-    private Integer codigoPais;
+    private String id;
 
-    @Column(name = "nombre_pais", nullable = false)
+    @Field("codigoPais")
+    private String codigoPais;
+
+    @Field("nombrePais")
     private String nombrePais;
 
-    @Column(name = "capital_pais", nullable = false)
+    @Field("capitalPais")
     private String capitalPais;
 
-    @Column(name = "region", nullable = false)
+    @Field("region")
     private String region;
 
-    @Column(name = "subregion", nullable = false)
-    private String subregion;
-
-    @Column(name = "poblacion", nullable = false)
+    @Field("poblacion")
     private Long poblacion;
 
-    @Column(name = "latitud", nullable = false)
-    private Double latitud;
+    @Field("coordenadas")
+    private Coordenadas coordenadas;
 
-    @Column(name = "longitud", nullable = false)
-    private Double longitud;
+    @Field("superficie")
+    private Double superficie;
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Coordenadas {
+        private Double latitud;
+        private Double longitud;
+
+    }
 }
